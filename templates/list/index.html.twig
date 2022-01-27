@@ -13,11 +13,32 @@
                     <div class="card-body">
                         <div class="card-header">List of top technology companies</div>
                             <table class="table">
-                                <tr>
-                                    <th>Company Name</th>
-                                    <th>Market Value</th>
-                                </tr>
 
+
+
+                                <tr>
+                                    <th>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                            <label class="form-check-label" for="flexCheckDefault">
+                                                Name
+                                            </label>
+                                        </div>
+                                    </th>
+                                    <th>mail</th>
+                                </tr>
+                                {% for user in users %}
+                                    <th>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                            <label class="form-check-label" for="flexCheckDefault">
+                                                {{ user.getName() }}
+                                            </label>
+                                        </div>
+                                    </th>
+                                    <th>{{ user.getUsername() }}</th>
+                                    <tr></tr>
+                                {% endfor %}
                             </table>
 
 
