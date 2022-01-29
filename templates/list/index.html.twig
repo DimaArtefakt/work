@@ -26,7 +26,7 @@
                                 {% for user in users %}
                                     <th>
                                         <div class="form-check">
-                                                {{ user.getName() }}
+                                              <a href="{{ path('hоme_page') }}">{{ user.getName() }}</a>
                                         </div>
                                     </th>
                                     <th>{{ user.getUsername() }}</th>

@@ -25,6 +25,7 @@
     <ul class="nav navbar-nav navbar-right">
         {% if app.user %}
             <a class="nav-link" href="{{ path('hоme_page') }}">You are logged in as {{ app.user.username }}</a>
+            <li><a class="nav-link" href="{{ path('item') }}">Add item</a></li>
             <li><a class="nav-link" href="{{ path('topic') }}">Add topic</a></li>
             <li><a class="nav-link" href="{{ path('collection') }}">Add collection</a></li>
             <li><a class="nav-link" href="{{ path('list') }}">User List</a></li>
