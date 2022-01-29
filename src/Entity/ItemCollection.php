@@ -27,8 +27,9 @@ class ItemCollection
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $img;
 
-    #[ORM\OneToMany(mappedBy: 'collection', targetEntity: Topic::class, orphanRemoval: true)]
-    private Collection $topics;
+    #[ORM\ManyToOne(targetEntity: Topic::class, inversedBy: 'itemCollections')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $topic;
 
     public function __construct()
     {
@@ -133,6 +134,30 @@ class ItemCollection
                 $topic->setCollection(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getIdTopic(): ?Topic
+    {
+        return $this->id_topic;
+    }
+
+    public function setIdTopic(?Topic $id_topic): self
+    {
+        $this->id_topic = $id_topic;
+
+        return $this;
+    }
+
+    public function getTopic(): ?Topic
+    {
+        return $this->topic;
+    }
+
+    public function setTopic(?Topic $topic): self
+    {
+        $this->topic = $topic;
 
         return $this;
     }

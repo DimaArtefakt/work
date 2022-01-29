@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\TopicRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: TopicRepository::class)]
@@ -16,9 +18,14 @@ class Topic
     #[ORM\Column(type: 'string', length: 255)]
     private $name;
 
-    #[ORM\ManyToOne(targetEntity: ItemCollection::class, inversedBy: 'topics')]
-    #[ORM\JoinColumn(nullable: false)]
-    private $collection;
+    #[ORM\OneToMany(mappedBy: 'topic', targetEntity: ItemCollection::class, orphanRemoval: true)]
+    private $itemCollections;
+
+    public function __construct()
+    {
+        $this->itemCollections = new ArrayCollection();
+    }
+
 
     public function getId(): ?int
     {
@@ -37,14 +44,34 @@ class Topic
         return $this;
     }
 
-    public function getCollection(): ?ItemCollection
+
+
+    /**
+     * @return Collection|ItemCollection[]
+     */
+    public function getItemCollections(): Collection
     {
-        return $this->collection;
+        return $this->itemCollections;
     }
 
-    public function setCollection(?ItemCollection $collection): self
+    public function addItemCollection(ItemCollection $itemCollection): self
     {
-        $this->collection = $collection;
+        if (!$this->itemCollections->contains($itemCollection)) {
+            $this->itemCollections[] = $itemCollection;
+            $itemCollection->setTopic($this);
+        }
+
+        return $this;
+    }
+
+    public function removeItemCollection(ItemCollection $itemCollection): self
+    {
+        if ($this->itemCollections->removeElement($itemCollection)) {
+            // set the owning side to null (unless already changed)
+            if ($itemCollection->getTopic() === $this) {
+                $itemCollection->setTopic(null);
+            }
+        }
 
         return $this;
     }

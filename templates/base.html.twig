@@ -24,14 +24,15 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent"></div>
     <ul class="nav navbar-nav navbar-right">
         {% if app.user %}
-            <li class="nav-link">You are logged in as {{ app.user.username }}</li>
-            <li><a class="nav-link" href="{{ path('collection') }}">View 1</a></li>
-            <li><a class="nav-link" href="{{ path('list') }}">View List</a></li>
+            <a class="nav-link" href="{{ path('hоme_page') }}">You are logged in as {{ app.user.username }}</a>
+            <li><a class="nav-link" href="{{ path('topic') }}">Add topic</a></li>
+            <li><a class="nav-link" href="{{ path('collection') }}">Add collection</a></li>
+            <li><a class="nav-link" href="{{ path('list') }}">User List</a></li>
             <li><a class="nav-link" href="{{ path('app_logout') }}">Logout</a></li>
         {% else %}
             <li><a class="nav-link" href="{{ path('app_login') }}">Login</a></li>
             <li>
-                <a class="nav-link" href="{{ path('app_register') }}">Register</a>
+                <a class="nav-link" href="{{ path('app_register') }}">Registeration</a>
             </li>
         {% endif %}
     </ul>
