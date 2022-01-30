@@ -31,6 +31,10 @@ class ItemCollection
     #[ORM\JoinColumn(nullable: false)]
     private $topic;
 
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'itemCollections')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $user;
+
     public function __construct()
     {
         $this->items = new ArrayCollection();
@@ -138,17 +142,7 @@ class ItemCollection
         return $this;
     }
 
-    public function getIdTopic(): ?Topic
-    {
-        return $this->id_topic;
-    }
 
-    public function setIdTopic(?Topic $id_topic): self
-    {
-        $this->id_topic = $id_topic;
-
-        return $this;
-    }
 
     public function getTopic(): ?Topic
     {
@@ -158,6 +152,20 @@ class ItemCollection
     public function setTopic(?Topic $topic): self
     {
         $this->topic = $topic;
+
+        return $this;
+    }
+    /**
+     * @return Collection|User[]
+     */
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

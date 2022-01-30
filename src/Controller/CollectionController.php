@@ -7,6 +7,7 @@ use App\Entity\Topic;
 use App\Form\ItemCollectionFormType;
 use App\Form\TopicFormType;
 use Doctrine\ORM\EntityManagerInterface;
+use http\Client\Curl\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,11 +18,14 @@ class CollectionController extends AbstractController
     #[Route('/collection', name: 'collection')]
     public function index(Request $request,EntityManagerInterface $em): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $user = $this->getUser();
         $collection = new ItemCollection();
         $form = $this->createForm(ItemCollectionFormType::class, $collection);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $collection ->setUser($user);
             $em->persist($collection);
             $em->flush();
         }
