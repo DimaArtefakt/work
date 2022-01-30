@@ -40,6 +40,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->itemCollections = new ArrayCollection();
     }
+    public function isGranted($role)
+    {
+        return in_array($role, $this->getRoles());
+    }
+
+
+    public function __toString(): string
+    {
+        return  $this->email;
+    }
 
     public function getId(): ?int
     {

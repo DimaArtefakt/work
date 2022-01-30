@@ -1,17 +1,10 @@
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <title>{% block title %}Welcome!{% endblock %}</title>
-
     {% block stylesheets %}
-
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     {% endblock %}
 </head>
@@ -22,10 +15,9 @@
     <ul class="nav navbar-nav navbar-right">
         {% if app.user %}
             <a class="nav-link" href="{{ path('hоme_page') }}">You are logged in as {{ app.user.username }}</a>
-            <li><a class="nav-link" href="{{ path('item') }}">Add item</a></li>
-            <li><a class="nav-link" href="{{ path('topic') }}">Add topic</a></li>
-            <li><a class="nav-link" href="{{ path('collection') }}">Add collection</a></li>
-            <li><a class="nav-link" href="{{ path('list') }}">User List</a></li>
+            {% if app.user.granted('ROLE_ADMIN') %}
+            <li><a class="nav-link" href="{{ path('admin') }}">Admin</a></li>
+            {% endif %}
             <li><a class="nav-link" href="{{ path('app_logout') }}">Logout</a></li>
         {% else %}
             <li><a class="nav-link" href="{{ path('app_login') }}">Login</a></li>
@@ -45,6 +37,5 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 {% endblock %}
-
 </body>
 </html>
