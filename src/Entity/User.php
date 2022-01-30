@@ -45,11 +45,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return in_array($role, $this->getRoles());
     }
 
-
     public function __toString(): string
     {
         return  $this->email;
     }
+
 
     public function getId(): ?int
     {
