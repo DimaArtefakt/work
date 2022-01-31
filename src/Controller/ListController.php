@@ -45,7 +45,7 @@ class ListController extends AbstractController
             $em->flush();
         }
         return $this->render('list/editUser.html.twig', [
-            'registrationForm' => $form->createView(),
+            'EditUserForm' => $form->createView(),
         ]);
     }
     #[Route('/deleteUser/{id}', name: 'deleteUser')]

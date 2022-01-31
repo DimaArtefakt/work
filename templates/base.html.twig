@@ -14,7 +14,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent"></div>
     <ul class="nav navbar-nav navbar-right">
         {% if app.user %}
-            <a class="nav-link" href="{{ path('hоme_page') }}">You are logged in as {{ app.user.username }}</a>
+            <a class="nav-link" href="{{ path('profile') }}">You are logged in as {{ app.user.username }}</a>
             {% if app.user.granted('ROLE_ADMIN') %}
             <li><a class="nav-link" href="{{ path('admin') }}">Admin</a></li>
             {% endif %}
