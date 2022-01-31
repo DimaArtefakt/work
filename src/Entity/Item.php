@@ -20,7 +20,10 @@ class Item
     #[ORM\JoinColumn(nullable: false)]
     private $collection;
 
-
+    public function __toString(): string
+    {
+        return  $this->name;
+    }
 
 
     public function getId(): ?int
