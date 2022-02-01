@@ -33,7 +33,6 @@ class ListController extends AbstractController
     #[Route('/editList/{id}', name: 'editUser')]
     public function editUser($id,Request $request,EntityManagerInterface $em): Response
     {
-
         $user = new User();
         $user = $this->em->getRepository(User::class)->findOneBy(['id' => $id]);
         $form = $this->createForm(EditUserType::class, $user);
